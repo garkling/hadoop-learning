@@ -7,7 +7,6 @@ set -a
 gcloud services enable dataproc.googleapis.com
 gcloud services enable cloudresourcemanager.googleapis.com
 
-gcloud services enable
 # restrict the `default` network ingress on the SSH 22 port to only the client public ip
 gcloud compute firewall-rules update default-allow-ssh \
         --source-ranges="$CLIENT_IP" \
