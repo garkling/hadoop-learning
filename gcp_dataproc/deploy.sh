@@ -43,5 +43,5 @@ gcloud dataproc clusters create "$CLUSTER_NAME" \
         --bucket "$PROJECT"-staging
 
 gcloud compute ssh "$CLUSTER_NAME"-m \
-        --zone "$REGION"-a \
+        --zone "$(gcloud compute instances list --project "$PROJECT" --filter="name=$CLUSTER_NAME-m" --format="value(zone)")" \
         --project "$PROJECT"
