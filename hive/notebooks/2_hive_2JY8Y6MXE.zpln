@@ -1,0 +1,381 @@
+{
+ "paragraphs": [
+  {
+   "title": "Create managed tables of different file storage formats",
+   "text": "%jdbc(hive)\nCREATE TABLE IF NOT EXISTS ratings_seq (\n  userid            INT,\n  movieid           INT,\n  rating            DOUBLE,\n  time_stamp        BIGINT\n)\nSTORED AS SEQUENCEFILE;\n\nCREATE TABLE IF NOT EXISTS ratings_orc (\n  userid            INT,\n  movieid           INT,\n  rating            DOUBLE,\n  time_stamp        BIGINT\n)\nSTORED AS ORC;\n\nCREATE TABLE IF NOT EXISTS ratings_parquet (\n  userid            INT,\n  movieid           INT,\n  rating            DOUBLE,\n  time_stamp        BIGINT\n)\nSTORED AS PARQUET;\n\nSHOW TABLES;\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.080",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {
+     "3": {
+      "graph": {
+       "mode": "table",
+       "height": 300.0,
+       "optionOpen": false,
+       "setting": {
+        "table": {
+         "tableGridState": {},
+         "tableColumnTypeState": {
+          "names": {
+           "tab_name": "string"
+          },
+          "updated": false
+         },
+         "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+         "tableOptionValue": {
+          "useFilter": false,
+          "showPagination": false,
+          "showAggregationFooter": false
+         },
+         "updated": false,
+         "initialized": false
+        }
+       },
+       "commonSetting": {}
+      }
+     }
+    },
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732080_207458077",
+   "id": "20171025-175127_697314907",
+   "dateCreated": "2024-05-05 19:35:32.080",
+   "status": "READY"
+  },
+  {
+   "title": "Multitable insert into tables",
+   "text": "%jdbc(hive)\nSET hive.tez.container.size=4096;\nSET hive.execution.engine=mr;\n\nFROM ratings_text\nINSERT OVERWRITE TABLE ratings_seq SELECT userid, movieid, rating, time_stamp  \nINSERT OVERWRITE TABLE ratings_orc SELECT userid, movieid, rating, time_stamp\nINSERT OVERWRITE TABLE ratings_parquet SELECT userid, movieid, rating, time_stamp;\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.081",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {
+     "0": {
+      "graph": {
+       "mode": "table",
+       "height": 300.0,
+       "optionOpen": false,
+       "setting": {
+        "table": {
+         "tableGridState": {},
+         "tableColumnTypeState": {
+          "names": {
+           "set": "string"
+          },
+          "updated": false
+         },
+         "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+         "tableOptionValue": {
+          "useFilter": false,
+          "showPagination": false,
+          "showAggregationFooter": false
+         },
+         "updated": false,
+         "initialized": false
+        }
+       },
+       "commonSetting": {}
+      }
+     }
+    },
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732081_1056818810",
+   "id": "20171025-175237_1092668331",
+   "dateCreated": "2024-05-05 19:35:32.081",
+   "status": "READY"
+  },
+  {
+   "title": "Show create table for a managed table",
+   "text": "%jdbc(hive)\nSHOW CREATE TABLE ratings_seq;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.082",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "sql",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/sql",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {
+     "0": {
+      "graph": {
+       "mode": "table",
+       "height": 300.0,
+       "optionOpen": false,
+       "setting": {
+        "table": {
+         "tableGridState": {},
+         "tableColumnTypeState": {
+          "names": {
+           "createtab_stmt": "string"
+          },
+          "updated": false
+         },
+         "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+         "tableOptionValue": {
+          "useFilter": false,
+          "showPagination": false,
+          "showAggregationFooter": false
+         },
+         "updated": false,
+         "initialized": false
+        }
+       },
+       "commonSetting": {}
+      }
+     }
+    },
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732082_1514661043",
+   "id": "20210221-163304_904446572",
+   "dateCreated": "2024-05-05 19:35:32.082",
+   "status": "READY"
+  },
+  {
+   "title": "Check size of data for different formats",
+   "text": "%sh\nhdfs dfs -du -s -h /user/hive/warehouse/*\nhdfs dfs -du -s -h /data/external-tables/ratings*",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.082",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sh",
+     "completionSupport": false
+    },
+    "editorMode": "ace/mode/sh",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732082_22412340",
+   "id": "20171025-175328_510063603",
+   "dateCreated": "2024-05-05 19:35:32.082",
+   "status": "READY"
+  },
+  {
+   "title": "Rename table",
+   "text": "%jdbc(hive)\nALTER TABLE ratings_orc RENAME TO ratings;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.082",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732082_909155387",
+   "id": "20171025-175432_754330870",
+   "dateCreated": "2024-05-05 19:35:32.082",
+   "status": "READY"
+  },
+  {
+   "title": "Create movies and tags tables with ORC format",
+   "text": "%jdbc(hive)\nSET hive.tez.container.size=4096;\nSET hive.execution.engine=mr;\n\nCREATE TABLE IF NOT EXISTS movies \nSTORED AS ORC\nAS SELECT * FROM movies_text;\n\nCREATE TABLE IF NOT EXISTS tags\nSTORED AS ORC\nAS SELECT * FROM tags_text;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.082",
+   "progress": 0,
+   "config": {
+    "tableHide": false,
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732082_537748945",
+   "id": "20171025-175620_777098208",
+   "dateCreated": "2024-05-05 19:35:32.082",
+   "status": "READY"
+  },
+  {
+   "title": "Drop tables and collect statistics",
+   "text": "%jdbc(hive)\nDROP TABLE IF EXISTS movies_text;\nDROP TABLE IF EXISTS ratings_text;\nDROP TABLE IF EXISTS tags_text;\nDROP TABLE IF EXISTS ratings_parquet;\nDROP TABLE IF EXISTS ratings_seq;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.083",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732083_2009832422",
+   "id": "20171025-175734_1147203442",
+   "dateCreated": "2024-05-05 19:35:32.083",
+   "status": "READY"
+  },
+  {
+   "title": "Collect statistics for ORC tables",
+   "text": "%jdbc(hive)\nANALYZE TABLE ratings COMPUTE STATISTICS;\nANALYZE TABLE movies COMPUTE STATISTICS;\nANALYZE TABLE tags COMPUTE STATISTICS;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.083",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "sql",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/sql",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732083_1494548768",
+   "id": "20210221-163659_223757409",
+   "dateCreated": "2024-05-05 19:35:32.083",
+   "status": "READY"
+  },
+  {
+   "title": "Run some query",
+   "text": "%jdbc(hive)\nSET hive.execution.engine=mr;\n\nSELECT userid, m.movieid, UPPER(title), genres, IF(rating < 3.0, 0.0, rating)\nFROM ratings r\nJOIN movies m\nON r.movieid=m.movieid;",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-05 19:35:32.084",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "editOnDblClick": false,
+     "language": "sql",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/sql",
+    "colWidth": 12.0,
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1714937732084_2099799506",
+   "id": "20171025-175819_203355897",
+   "dateCreated": "2024-05-05 19:35:32.084",
+   "status": "READY"
+  }
+ ],
+ "name": "Task 2 - hive",
+ "id": "2JXX3MHE8",
+ "defaultInterpreterGroup": "spark",
+ "version": "0.10.1",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false
+ },
+ "info": {}
+}

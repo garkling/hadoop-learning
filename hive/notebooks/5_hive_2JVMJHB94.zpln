@@ -1,0 +1,46 @@
+{
+ "paragraphs": [
+  {
+   "user": "anonymous",
+   "config": {
+    "colWidth": 12,
+    "fontSize": 9,
+    "enabled": true,
+    "results": {},
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "editorMode": "ace/mode/scala",
+    "title": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "jobName": "paragraph_1563110258183_1613653816",
+   "id": "20190714-161738_1950435706",
+   "dateCreated": "2019-07-14T16:17:38+0300",
+   "status": "READY",
+   "progressUpdateIntervalMs": 500,
+   "focus": true,
+   "$$hashKey": "object:394",
+   "text": "%jdbc(hive)\nSET hive.execution.engine=mr; -- use tez/spark if you have plenty cluster resources\n\nSELECT m.title, r.rating, r.rank, r.tag FROM movies m\nJOIN (\n    SELECT  r.movieid,\n            r.rating,\n            t.tag,\n            DENSE_RANK() OVER (PARTITION BY (t.tag) ORDER BY r.rating DESC) as rank\n\n    FROM (\n        SELECT movieid, AVG(rating) AS rating \n        FROM ratings \n        GROUP BY movieid\n    ) r\n    JOIN (\n        SELECT movieid, tag FROM tags \n        WHERE tag RLIKE '^based on a (book|play)$' \n        GROUP BY movieid, tag\n    ) t\n    ON t.movieid = r.movieid\n\n    ORDER BY rank\n\n) r ON r.movieid = m.movieid\nWHERE r.rank <= 5\nORDER BY r.rank;",
+   "title": "Show top-5 rated movies for tags 'based on a book' and 'based on a play' "
+  }
+ ],
+ "name": "Zeppelin Notebook",
+ "id": "",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false,
+  "looknfeel": "default",
+  "personalizedMode": "false"
+ },
+ "info": {}
+}
