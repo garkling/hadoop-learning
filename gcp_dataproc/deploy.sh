@@ -25,6 +25,8 @@ gcloud storage buckets create gs://"$PROJECT"-staging \
         --location="$REGION" \
         --uniform-bucket-level-access
 
+gsutil cp init-actions.sh gs://"$PROJECT"-staging/
+
 gcloud dataproc clusters create "$CLUSTER_NAME" \
         --enable-component-gateway \
         --public-ip-address \
@@ -40,7 +42,8 @@ gcloud dataproc clusters create "$CLUSTER_NAME" \
         --image-version 2.2-debian12 \
         --optional-components ZEPPELIN \
         --project "$PROJECT" \
-        --bucket "$PROJECT"-staging
+        --bucket "$PROJECT"-staging \
+        --initialization-actions="gs://$PROJECT-staging/init-actions.sh"
 
 gcloud compute ssh "$CLUSTER_NAME"-m \
         --zone "$(gcloud compute instances list --project "$PROJECT" --filter="name=$CLUSTER_NAME-m" --format="value(zone)")" \
