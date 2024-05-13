@@ -1,0 +1,1295 @@
+{
+ "paragraphs": [
+  {
+   "text": "%md\n## RDD basic examples\n* creating RDDs manually\n* basic transformations\n* basic actions\n* reading RDD from simple HDFS file",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:37:19.386",
+   "progress": 0,
+   "config": {
+    "tableHide": false,
+    "editorSetting": {
+     "language": "markdown",
+     "editOnDblClick": true,
+     "completionKey": "TAB",
+     "completionSupport": false
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/markdown",
+    "fontSize": 9.0,
+    "editorHide": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<div class=\"markdown-body\">\n<h2>RDD basic examples</h2>\n<ul>\n<li>creating RDDs manually</li>\n<li>basic transformations</li>\n<li>basic actions</li>\n<li>reading RDD from simple HDFS file</li>\n</ul>\n\n</div>"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621831210_1998942715",
+   "id": "paragraph_1715621831210_1998942715",
+   "dateCreated": "2024-05-13 20:37:11.210",
+   "dateStarted": "2024-05-13 20:37:19.386",
+   "dateFinished": "2024-05-13 20:37:21.270",
+   "status": "FINISHED"
+  },
+  {
+   "text": "%md\nSparkContext object is automatically created by Zeppelin:\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:37:31.080",
+   "progress": 0,
+   "config": {
+    "tableHide": false,
+    "editorSetting": {
+     "language": "markdown",
+     "editOnDblClick": true,
+     "completionKey": "TAB",
+     "completionSupport": false
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/markdown",
+    "fontSize": 9.0,
+    "editorHide": false,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<div class=\"markdown-body\">\n<p>SparkContext object is automatically created by Zeppelin:</p>\n\n</div>"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621839385_1615425217",
+   "id": "paragraph_1715621839385_1615425217",
+   "dateCreated": "2024-05-13 20:37:19.385",
+   "dateStarted": "2024-05-13 20:37:31.080",
+   "dateFinished": "2024-05-13 20:37:31.093",
+   "status": "FINISHED"
+  },
+  {
+   "text": "%pyspark\nprint(\"Here's predefined SparkContext object:{0}\".format(sc))\nprint(\"SparkContext is an entry point for all other methods we will use.\\nIt's methods and properties:\")\nprint(\"-\"*80)\nprint(dir(sc))\nprint(\"-\"*80)\nprint(\"\\n\")\nprint(\"In usual Python program SparkContext would be created like this:\")\nprint(\"from pyspark import SparkContext\")\nprint(\"sc = SparkContext(appName = 'HelloWorld')\")",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:37:36.390",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "Here's predefined SparkContext object:<SparkContext master=local[*] appName=spark-shared_process>\nSparkContext is an entry point for all other methods we will use.\nIt's methods and properties:\n--------------------------------------------------------------------------------\n['PACKAGE_EXTENSIONS', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__enter__', '__eq__', '__exit__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_accumulatorServer', '_active_spark_context', '_assert_on_driver', '_batchSize', '_callsite', '_checkpointFile', '_conf', '_dictToJavaMap', '_do_init', '_encryption_enabled', '_ensure_initialized', '_gateway', '_getJavaStorageLevel', '_initialize_context', '_javaAccumulator', '_jsc', '_jvm', '_lock', '_next_accum_id', '_pickled_broadcast_vars', '_python_includes', '_repr_html_', '_serialize_to_jvm', '_temp_dir', '_unbatched_serializer', 'accumulator', 'addFile', 'addPyFile', 'appName', 'applicationId', 'binaryFiles', 'binaryRecords', 'broadcast', 'cancelAllJobs', 'cancelJobGroup', 'defaultMinPartitions', 'defaultParallelism', 'dump_profiles', 'emptyRDD', 'environment', 'getCheckpointDir', 'getConf', 'getLocalProperty', 'getOrCreate', 'hadoopFile', 'hadoopRDD', 'master', 'newAPIHadoopFile', 'newAPIHadoopRDD', 'parallelize', 'pickleFile', 'profiler_collector', 'pythonExec', 'pythonVer', 'range', 'resources', 'runJob', 'sequenceFile', 'serializer', 'setCheckpointDir', 'setJobDescription', 'setJobGroup', 'setLocalProperty', 'setLogLevel', 'setSystemProperty', 'show_profiles', 'sparkHome', 'sparkUser', 'startTime', 'statusTracker', 'stop', 'textFile', 'uiWebUrl', 'union', 'version', 'wholeTextFiles']\n--------------------------------------------------------------------------------\n\n\nIn usual Python program SparkContext would be created like this:\nfrom pyspark import SparkContext\nsc = SparkContext(appName = 'HelloWorld')\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621851079_1187077221",
+   "id": "paragraph_1715621851079_1187077221",
+   "dateCreated": "2024-05-13 20:37:31.079",
+   "dateStarted": "2024-05-13 20:37:36.393",
+   "dateFinished": "2024-05-13 20:37:36.413",
+   "status": "FINISHED"
+  },
+  {
+   "title": "RDD can be created from driver program list by calling SparkContext.parallelize method",
+   "text": "%pyspark\nl = range(5)\nr = sc.parallelize(l)\nprint(type(l))\nprint(type(r))\nprint(r.collect())",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:37:58.859",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "<class 'range'>\n<class 'pyspark.rdd.PipelinedRDD'>\n[0, 1, 2, 3, 4]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=29"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621856392_397980191",
+   "id": "paragraph_1715621856392_397980191",
+   "dateCreated": "2024-05-13 20:37:36.393",
+   "dateStarted": "2024-05-13 20:37:44.856",
+   "dateFinished": "2024-05-13 20:37:45.036",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: filter",
+   "text": "%pyspark\n\n# Filters out RDD elements for which function returns False\nnum = sc.parallelize([1,2,3,4,5])\nnum.filter(lambda x: x % 2 == 0).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:38:18.858",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[2, 4]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=30"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621864855_399545241",
+   "id": "paragraph_1715621864855_399545241",
+   "dateCreated": "2024-05-13 20:37:44.855",
+   "dateStarted": "2024-05-13 20:38:07.656",
+   "dateFinished": "2024-05-13 20:38:07.819",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: map",
+   "text": "%pyspark\n\n#Applies function to each RDD element and returns the result\nnum = sc.parallelize([1,2,3,4,5])\nnum.map(lambda x: x*x).collect()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:39:11.343",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[1, 4, 9, 16, 25]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=31"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621887655_55448716",
+   "id": "paragraph_1715621887655_55448716",
+   "dateCreated": "2024-05-13 20:38:07.656",
+   "dateStarted": "2024-05-13 20:38:26.840",
+   "dateFinished": "2024-05-13 20:38:27.027",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: flatMap",
+   "text": "%pyspark\n# Applies function to each RDD element. Function is expected to return a list for each input element.\n# Resulting lists are combined to the single list.\n\ntxt = sc.parallelize(['I must not fear'\n                     ,'Fear is the mind-killer'\n                     ,'Fear is the little-death that brings total obliteration.'])\n\nprint(txt.flatMap(lambda x: x.split(' ')).collect())   # flat map\nprint(txt.map(lambda line: line.split(' ')).collect()) # simple map",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:39:15.541",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['I', 'must', 'not', 'fear', 'Fear', 'is', 'the', 'mind-killer', 'Fear', 'is', 'the', 'little-death', 'that', 'brings', 'total', 'obliteration.']\n[['I', 'must', 'not', 'fear'], ['Fear', 'is', 'the', 'mind-killer'], ['Fear', 'is', 'the', 'little-death', 'that', 'brings', 'total', 'obliteration.']]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=32"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=33"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621906839_1874228721",
+   "id": "paragraph_1715621906839_1874228721",
+   "dateCreated": "2024-05-13 20:38:26.840",
+   "dateStarted": "2024-05-13 20:39:03.193",
+   "dateFinished": "2024-05-13 20:39:03.463",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: distinct",
+   "text": "%pyspark\n# Returns unique elements.\ntxt = sc.parallelize(['I must not fear'\n                     ,'Fear is the mind-killer'\n                     ,'Fear is the little-death that brings total obliteration.'])\nprint(txt.flatMap(lambda x: x.split(' ')) \\\n         .map(lambda x: x.lower()) \\\n         .distinct() \\\n         .collect()\n    )",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:46:26.044",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['i', 'that', 'brings', 'mind-killer', 'little-death', 'must', 'the', 'fear', 'is', 'obliteration.', 'not', 'total']\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=36"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622004655_1192911770",
+   "id": "paragraph_1715622004655_1192911770",
+   "dateCreated": "2024-05-13 20:40:04.655",
+   "dateStarted": "2024-05-13 20:40:06.424",
+   "dateFinished": "2024-05-13 20:40:06.682",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: union",
+   "text": "%pyspark\n\n# Just combines two RDDs into one. Note: it is NOT removing duplicates\nnum1 = sc.parallelize([1,2,3])\nnum2 = sc.parallelize([3,4,5])\nnum1.union(num2).collect()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:39:40.274",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[1, 2, 3, 3, 4, 5]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=34"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621943193_1242772810",
+   "id": "paragraph_1715621943193_1242772810",
+   "dateCreated": "2024-05-13 20:39:03.193",
+   "dateStarted": "2024-05-13 20:39:26.673",
+   "dateFinished": "2024-05-13 20:39:26.720",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: cartesian",
+   "text": "%pyspark\n# Produces cartesian product on two RDDs\ncol = sc.parallelize(['A','B','C','D','E','F','G','H'])\nrow = sc.parallelize(range(1,9))\n\ncol.cartesian(row).collect()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:46:16.063",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('A', 1), ('A', 2), ('A', 3), ('A', 4), ('A', 5), ('A', 6), ('A', 7), ('A', 8), ('B', 1), ('B', 2), ('B', 3), ('B', 4), ('B', 5), ('B', 6), ('B', 7), ('B', 8), ('C', 1), ('C', 2), ('C', 3), ('C', 4), ('C', 5), ('C', 6), ('C', 7), ('C', 8), ('D', 1), ('D', 2), ('D', 3), ('D', 4), ('D', 5), ('D', 6), ('D', 7), ('D', 8), ('E', 1), ('E', 2), ('E', 3), ('E', 4), ('E', 5), ('E', 6), ('E', 7), ('E', 8), ('F', 1), ('F', 2), ('F', 3), ('F', 4), ('F', 5), ('F', 6), ('F', 7), ('F', 8), ('G', 1), ('G', 2), ('G', 3), ('G', 4), ('G', 5), ('G', 6), ('G', 7), ('G', 8), ('H', 1), ('H', 2), ('H', 3), ('H', 4), ('H', 5), ('H', 6), ('H', 7), ('H', 8)]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=35"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621966673_759795120",
+   "id": "paragraph_1715621966673_759795120",
+   "dateCreated": "2024-05-13 20:39:26.673",
+   "dateStarted": "2024-05-13 20:39:50.875",
+   "dateFinished": "2024-05-13 20:39:51.683",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: intersection",
+   "text": "%pyspark\n\n#Returns elements that are present in both RDDs. Note: duplicates are removed\ndynamo = sc.parallelize(['Shevchenko','Rebrov','Luzhniy','Kaladze','Belkevich','Gusev','Shevchenko']) \nmilan  = sc.parallelize(['Barezzi','Maldini','Costacurta','Van Basten','Shevchenko','Kaladze','Shevchenko'])\n\ndynamo.intersection(milan).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:46:05.584",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['Shevchenko', 'Kaladze']\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=37"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715621990874_595752237",
+   "id": "paragraph_1715621990874_595752237",
+   "dateCreated": "2024-05-13 20:39:50.875",
+   "dateStarted": "2024-05-13 20:40:16.264",
+   "dateFinished": "2024-05-13 20:40:16.914",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: subtract",
+   "text": "%pyspark\n\n# Removes elements present in another RDD\nsouthpark = sc.parallelize(['Stan','Kyle','Eric','Kenny'])\nkilled = sc.parallelize(['Kenny'])\n\nsouthpark.subtract(killed).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:45:53.329",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['Kyle', 'Eric', 'Stan']\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=38"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622016263_269782647",
+   "id": "paragraph_1715622016263_269782647",
+   "dateCreated": "2024-05-13 20:40:16.263",
+   "dateStarted": "2024-05-13 20:40:21.877",
+   "dateFinished": "2024-05-13 20:40:22.659",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: groupBy (avoid)",
+   "text": "%pyspark\n\n# Groups elements by key returned by function\nb = sc.parallelize(['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'])\n\nprint([(k,list(v)) for k,v in b.groupBy(lambda x: x[0]).collect()])",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:45:39.398",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('W', ['Wednesday']), ('M', ['Monday']), ('T', ['Tuesday', 'Thursday']), ('F', ['Friday']), ('S', ['Saturday', 'Sunday'])]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=39"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622021876_1153038371",
+   "id": "paragraph_1715622021876_1153038371",
+   "dateCreated": "2024-05-13 20:40:21.876",
+   "dateStarted": "2024-05-13 20:40:26.768",
+   "dateFinished": "2024-05-13 20:40:27.047",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: zip",
+   "text": "%pyspark\n\n# Combines two RDDs into one by elements\nnum = sc.parallelize([1,2,3,4,5])\nname = sc.parallelize(['One','Two','Three','Four','Five'])\n\nnum.zip(name).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:45:25.859",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[(1, 'One'), (2, 'Two'), (3, 'Three'), (4, 'Four'), (5, 'Five')]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=40"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622026767_1009510120",
+   "id": "paragraph_1715622026767_1009510120",
+   "dateCreated": "2024-05-13 20:40:26.767",
+   "dateStarted": "2024-05-13 20:40:31.307",
+   "dateFinished": "2024-05-13 20:40:31.352",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic transformations: sortBy",
+   "text": "%pyspark\n\n# Sorts RDD by key returned by function\nb = sc.parallelize(['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'])\n\nb.sortBy(lambda x: x[0]).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:45:14.856",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['Friday', 'Monday', 'Saturday', 'Sunday', 'Tuesday', 'Thursday', 'Wednesday']\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=41"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=42"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=43"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622031306_940267602",
+   "id": "paragraph_1715622031306_940267602",
+   "dateCreated": "2024-05-13 20:40:31.306",
+   "dateStarted": "2024-05-13 20:40:38.814",
+   "dateFinished": "2024-05-13 20:40:39.385",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: reduce",
+   "text": "%pyspark\n\n# Reduces RDD to a single value by applying specified function\nnum = sc.parallelize([1,2,3,4,5])\n\nnum.reduce(lambda x,y: x + y)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:44:58.903",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "15\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=56"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622038814_194694622",
+   "id": "paragraph_1715622038814_194694622",
+   "dateCreated": "2024-05-13 20:40:38.814",
+   "dateStarted": "2024-05-13 20:44:58.907",
+   "dateFinished": "2024-05-13 20:44:59.096",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Word count example",
+   "text": "%pyspark\n\n# Yes, this is word-count example. That's a big data course, after all.\n\ntxt = sc.parallelize(['I must not fear'\n                     ,'Fear is the mind-killer'\n                     ,'Fear is the little-death that brings total obliteration.'])\n                     \ntxt.flatMap(lambda x: x.split(' ')) \\\n   .map(lambda x: 1) \\\n   .reduce(lambda x,y: x + y)\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:44:44.960",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "16\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=45"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622043383_1249472673",
+   "id": "paragraph_1715622043383_1249472673",
+   "dateCreated": "2024-05-13 20:40:43.384",
+   "dateStarted": "2024-05-13 20:40:49.101",
+   "dateFinished": "2024-05-13 20:40:49.256",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: aggregate",
+   "text": "%pyspark\n\n# Like “reduce”, but return type should not match RDD element type.\n# Takes three arguments:\n#  * start aggregated value\n#  * function to combine aggregated value with element\n#  * function to combine two aggregated values\n\nnum = sc.parallelize([1,2,3,4,5])\n\n# calculate sum, sum of squares and number of elements of the RDD\nnum.aggregate((0,0,0) \\\n             ,lambda x,y: (x[0] + y, x[1] + y*y, x[2] + 1) \\\n             ,lambda x,y: (x[0]+y[0], x[1]+y[1], x[2]+ y[2])) \n             \n# why do we need the third parameter? Why don't we need it for reduce?\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:44:26.653",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "(15, 55, 5)\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=46"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622049101_1014087583",
+   "id": "paragraph_1715622049101_1014087583",
+   "dateCreated": "2024-05-13 20:40:49.101",
+   "dateStarted": "2024-05-13 20:40:53.901",
+   "dateFinished": "2024-05-13 20:40:54.095",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: collect",
+   "text": "%pyspark\n\n# Returns the whole RDD as a list to driver program. Obviously, RDD should fit driver's memory\n# see above examples",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:43:57.782",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622053900_855643980",
+   "id": "paragraph_1715622053900_855643980",
+   "dateCreated": "2024-05-13 20:40:53.901",
+   "dateStarted": "2024-05-13 20:41:20.378",
+   "dateFinished": "2024-05-13 20:41:20.384",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: take",
+   "text": "%pyspark\n\n# Returns a requested number of RDD elements (like partial collect()). Elements order is not guaranteed.\nnum = sc.parallelize(range(1,11))\n\nprint(num.take(3))",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:43:49.398",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[1, 2, 3]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=47"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=48"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622080377_2056666479",
+   "id": "paragraph_1715622080377_2056666479",
+   "dateCreated": "2024-05-13 20:41:20.377",
+   "dateStarted": "2024-05-13 20:41:22.367",
+   "dateFinished": "2024-05-13 20:41:22.536",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: top",
+   "text": "%pyspark\n\n# Returns top N records sorted RDD\nnum = sc.parallelize([6,7,4,8,1,4,5,9,8,7])\n\nprint(num.take(3))\nprint(num.top(3, lambda x: -x))\nprint(num.take(3))\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:43:43.190",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[6, 7, 4]\n[1, 4, 4]\n[6, 7, 4]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=49"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=50"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=51"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=52"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=53"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622082367_231160027",
+   "id": "paragraph_1715622082367_231160027",
+   "dateCreated": "2024-05-13 20:41:22.367",
+   "dateStarted": "2024-05-13 20:41:29.991",
+   "dateFinished": "2024-05-13 20:41:30.416",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: forEach",
+   "text": "%pyspark\n\n# Just executes the function for each element in the RDD. Returns nothing. \n# Typical usage - some actions outside Spark (send email to each address, write each records to the DB etc.)\n\ndef print_element(x):\n    print(x)\n\nr = sc.parallelize(range(1,5))\n\nr.foreach(print_element) # what result do you expect?\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:43:19.093",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=54"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622089990_2119715204",
+   "id": "paragraph_1715622089990_2119715204",
+   "dateCreated": "2024-05-13 20:41:29.990",
+   "dateStarted": "2024-05-13 20:41:34.947",
+   "dateFinished": "2024-05-13 20:41:35.094",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Basic actions: countByValue",
+   "text": "%pyspark\n\ntxt = sc.parallelize(['I must not fear'\n                     ,'Fear is the mind-killer'\n                     ,'Fear is the little-death that brings total obliteration.'])\n\ntxt.flatMap(lambda x: x.split(' ')).map(lambda x: x.lower()).countByValue()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:42:57.606",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "defaultdict(<class 'int'>, {'i': 1, 'must': 1, 'not': 1, 'fear': 3, 'is': 2, 'the': 2, 'mind-killer': 1, 'little-death': 1, 'that': 1, 'brings': 1, 'total': 1, 'obliteration.': 1})\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=55"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622094947_843481588",
+   "id": "paragraph_1715622094947_843481588",
+   "dateCreated": "2024-05-13 20:41:34.947",
+   "dateStarted": "2024-05-13 20:41:38.495",
+   "dateFinished": "2024-05-13 20:41:38.659",
+   "status": "FINISHED"
+  },
+  {
+   "title": " Reading from file",
+   "text": "%pyspark\n\nmovies = sc.textFile('gs://oklev-uku-datasets/movie-ratings/movies.csv')\n\nmovies.take(5)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:42:47.119",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622098495_129837192",
+   "id": "paragraph_1715622098495_129837192",
+   "dateCreated": "2024-05-13 20:41:38.495",
+   "status": "READY"
+  }
+ ],
+ "name": "rdd_basics_1",
+ "id": "2JZJWJ2YK",
+ "defaultInterpreterGroup": "spark",
+ "version": "0.11.1",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false
+ },
+ "info": {}
+}

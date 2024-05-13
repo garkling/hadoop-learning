@@ -1,0 +1,544 @@
+{
+ "paragraphs": [
+  {
+   "text": "%pyspark\nmovies_file = 'gs://oklev-uku-datasets/movie-ratings/movies.csv'\n\ndef parse_csv_record(s):\n    id_, *title, genres = s.split(',')\n    return id_, ','.join(title).replace('\"', ''), genres\n\nmovies = sc.textFile(movies_file).map(parse_csv_record)\nheader = movies.first()\nmovies = movies.filter(lambda row: row and row != header)\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:17:47.274",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=1"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620659877_1335273029",
+   "id": "paragraph_1715620659877_1335273029",
+   "dateCreated": "2024-05-13 20:17:39.877",
+   "dateStarted": "2024-05-13 20:17:47.278",
+   "dateFinished": "2024-05-13 20:17:47.410",
+   "status": "FINISHED"
+  },
+  {
+   "text": "%pyspark\n\nprint(\n    *movies.take(5),\n    sep='\\n'\n)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:17:53.537",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=2"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620667277_1450350997",
+   "id": "paragraph_1715620667277_1450350997",
+   "dateCreated": "2024-05-13 20:17:47.278",
+   "dateStarted": "2024-05-13 20:17:53.541",
+   "dateFinished": "2024-05-13 20:17:53.649",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Find number of movies in the dataset ",
+   "text": "%pyspark\n\nmovies.count()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:23:52.870",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=3"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620673540_113189338",
+   "id": "paragraph_1715620673540_113189338",
+   "dateCreated": "2024-05-13 20:17:53.540",
+   "dateStarted": "2024-05-13 20:18:00.418",
+   "dateFinished": "2024-05-13 20:18:00.575",
+   "status": "FINISHED"
+  },
+  {
+   "title": "How many movies of \"Comedy\" genre database contains?",
+   "text": "%pyspark\n\n\n(movies\n    .filter(lambda m: \"Comedy\" in m[-1])\n    .count()\n)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:18:31.881",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=4"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620680418_2058186920",
+   "id": "paragraph_1715620680418_2058186920",
+   "dateCreated": "2024-05-13 20:18:00.418",
+   "dateStarted": "2024-05-13 20:18:31.884",
+   "dateFinished": "2024-05-13 20:18:32.031",
+   "status": "FINISHED"
+  },
+  {
+   "title": "What are the earliest and the latest years represented in the database? ",
+   "text": "%pyspark\nimport re \n\ndef get_year_from_title(row):\n    found = re.search(r'\\((\\d{4})\\)', row[1])\n    return *row, int(found[1]) if found else None\n    \nmovies_with_year = movies.map(get_year_from_title).filter(lambda row: row[-1] is not None)\n\nprint(movies_with_year.min(lambda m: m[-1]))\nprint(movies_with_year.max(lambda m: m[-1]))\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:24:15.512",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=5"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=6"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620711883_169464504",
+   "id": "paragraph_1715620711883_169464504",
+   "dateCreated": "2024-05-13 20:18:31.883",
+   "dateStarted": "2024-05-13 20:18:46.269",
+   "dateFinished": "2024-05-13 20:18:46.660",
+   "status": "FINISHED"
+  },
+  {
+   "title": "What is the minimum, average and maximum number of genres per single movie? ",
+   "text": "%pyspark\ndef get_genre_count(row):\n    genres = row[-1]\n    if genres == '(no genres listed)':\n        genre_count = 0\n    else:\n        genre_count = len(genres.split(\"|\"))\n\n    return *row, genre_count\n\nmovies_with_genre_count = movies.map(get_genre_count)\n\nprint(\"MIN\", movies_with_genre_count.min(lambda m: m[-1]))\nprint(\"MAX\", movies_with_genre_count.max(lambda m: m[-1]))\nprint(\"MEAN\", movies_with_genre_count.map(lambda m: m[-1]).mean())",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:24:29.582",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=7"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=8"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=9"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620726269_1690016315",
+   "id": "paragraph_1715620726269_1690016315",
+   "dateCreated": "2024-05-13 20:18:46.269",
+   "dateStarted": "2024-05-13 20:18:52.581",
+   "dateFinished": "2024-05-13 20:18:53.445",
+   "status": "FINISHED"
+  },
+  {
+   "title": "For each genre, find the number of movies of that genre ",
+   "text": "%pyspark\n\ndef get_genres(row):\n    return tuple((genre, 1) for genre in row[-1].split(\"|\"))  \n\nprint(\n    *(f'{genre}: {n}' for genre, n  in movies\n                                        .flatMap(get_genres)\n                                        .countByKey()\n                                        .items()\n), sep='\\n')",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:24:40.545",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=10"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620732580_751794019",
+   "id": "paragraph_1715620732580_751794019",
+   "dateCreated": "2024-05-13 20:18:52.580",
+   "dateStarted": "2024-05-13 20:19:01.046",
+   "dateFinished": "2024-05-13 20:19:01.225",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Show the list of unique genres represented in the dataset",
+   "text": "%pyspark\n\ndef get_genres(row):\n    return row[-1].split(\"|\")\n\nprint(\n    *movies.flatMap(get_genres).distinct().collect(), \n    sep='\\n'\n)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:24:53.266",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=11"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620741046_816006221",
+   "id": "paragraph_1715620741046_816006221",
+   "dateCreated": "2024-05-13 20:19:01.046",
+   "dateStarted": "2024-05-13 20:19:07.914",
+   "dateFinished": "2024-05-13 20:19:08.397",
+   "status": "FINISHED"
+  },
+  {
+   "title": "What is the longest movie name in the dataset?",
+   "text": "%pyspark\n\nmovies.max(lambda m: len(m[1]))",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:25:04.628",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=12"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620747914_287285484",
+   "id": "paragraph_1715620747914_287285484",
+   "dateCreated": "2024-05-13 20:19:07.914",
+   "dateStarted": "2024-05-13 20:19:15.826",
+   "dateFinished": "2024-05-13 20:19:15.980",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Show the list of reused movie names",
+   "text": "%pyspark\nimport re\nfrom operator import add\n\ndef get_duplicate_movies(m):\n    title = re.sub(r'\\s\\(\\d{4}\\)', '', m[1])\n    return title, 1\n\n\nreused_movie_titles = (movies\n    .map(get_duplicate_movies)\n    .reduceByKey(add)\n    .filter(lambda m: m[-1] > 1)\n    .sortBy(lambda m: m[-1], ascending=False)\n)\n\nprint(\n    *reused_movie_titles.collect(), \n    sep='\\n'\n)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:25:19.092",
+   "progress": 0,
+   "config": {
+    "tableHide": false,
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=13"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=14"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=15"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620755825_306819602",
+   "id": "paragraph_1715620755825_306819602",
+   "dateCreated": "2024-05-13 20:19:15.825",
+   "dateStarted": "2024-05-13 20:19:29.316",
+   "dateFinished": "2024-05-13 20:19:30.428",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Using the result for the previous task, show top 10 most frequently used film names",
+   "text": "%pyspark\nprint(\n    *reused_movie_titles.top(10, lambda m: m[-1]),\n    sep='\\n'\n)",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:25:32.539",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=16"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715620769315_1629033835",
+   "id": "paragraph_1715620769315_1629033835",
+   "dateCreated": "2024-05-13 20:19:29.315",
+   "dateStarted": "2024-05-13 20:20:13.745",
+   "dateFinished": "2024-05-13 20:20:13.832",
+   "status": "FINISHED"
+  }
+ ],
+ "name": "1_homework_rdd_basics",
+ "id": "2JZN8ECWC",
+ "defaultInterpreterGroup": "spark",
+ "version": "0.11.1",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false
+ },
+ "info": {}
+}

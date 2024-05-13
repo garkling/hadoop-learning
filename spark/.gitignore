@@ -1,0 +1,4 @@
+word-count-output/
+*.csv
+*.txt
+*.log

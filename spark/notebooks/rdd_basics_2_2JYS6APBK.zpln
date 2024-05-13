@@ -1,0 +1,727 @@
+{
+ "paragraphs": [
+  {
+   "text": "%md\n\n## Pair RDD transformations and actions\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:47:26.271",
+   "progress": 0,
+   "config": {
+    "tableHide": false,
+    "editorSetting": {
+     "language": "markdown",
+     "editOnDblClick": true,
+     "completionKey": "TAB",
+     "completionSupport": false
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/markdown",
+    "fontSize": 9.0,
+    "editorHide": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<div class=\"markdown-body\">\n<h2>Pair RDD transformations and actions</h2>\n\n</div>"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622435709_434831642",
+   "id": "paragraph_1715622435709_434831642",
+   "dateCreated": "2024-05-13 20:47:15.709",
+   "dateStarted": "2024-05-13 20:47:26.270",
+   "dateFinished": "2024-05-13 20:47:26.276",
+   "status": "FINISHED"
+  },
+  {
+   "title": "Create pair RDD",
+   "text": "%pyspark\n\nmonths  = sc.parallelize([('January',1),('February',2),('March',3),('April',4),('May',5),('June',6),('July',7),('August',8),('September',9),('October',10),('November',11),('December',12)])\n\nholidays = sc.parallelize([('January',1),('January',8),('January',22)\n                          ,('March',8)\n                          ,('May',1),('May',2),('May',9)\n                          ,('June',28)\n                          ,('August',24)\n                          ,('October',14)\n                          ])\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:16.938",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622446269_2042115472",
+   "id": "paragraph_1715622446269_2042115472",
+   "dateCreated": "2024-05-13 20:47:26.269",
+   "dateStarted": "2024-05-13 20:47:31.204",
+   "dateFinished": "2024-05-13 20:47:31.227",
+   "status": "FINISHED"
+  },
+  {
+   "title": "reduceByKey() and foldByKey()",
+   "text": "%pyspark\n\n# Executes reduce() operation separately for each RDD key. Returns RDD (one element per key), so it’s transformation, not an action\n\n# note output data types!\nprint(holidays.reduceByKey(lambda x,y: str(x) + ',' + str(y)).collect()) \n\nprint(holidays.foldByKey('',lambda x,y: x + (',' if len(x) > 0 else '') + str(y)).collect())\n\n\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:07.622",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('March', 8), ('June', 28), ('January', '1,8,22'), ('August', 24), ('May', '1,2,9'), ('October', 14)]\n[('March', '8'), ('June', '28'), ('January', '1,8,22'), ('August', '24'), ('May', '1,2,9'), ('October', '14')]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=57"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=58"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622451202_1666276542",
+   "id": "paragraph_1715622451202_1666276542",
+   "dateCreated": "2024-05-13 20:47:31.203",
+   "dateStarted": "2024-05-13 20:47:39.569",
+   "dateFinished": "2024-05-13 20:47:40.065",
+   "status": "FINISHED"
+  },
+  {
+   "title": "mapValues() and flatMapValues()",
+   "text": "%pyspark\n\n# Like map() and flatMap(), but operate only on \"value\" part of key-value RDD. \n\ndef date_postfix(day_no):\n    if day_no % 10 == 1:\n        return 'st'\n    elif day_no % 10 == 2:\n        return 'nd'\n    else: \n        return 'th'\n\nprint(holidays.mapValues(lambda x: str(x) + date_postfix(x)).collect())\n\nprint(holidays.reduceByKey(lambda x,y: str(x) + ',' + str(y))\\\n              .flatMapValues(lambda x:str(x).split(','))\\\n              .collect()\n    )\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:51:57.591",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('January', '1st'), ('January', '8th'), ('January', '22nd'), ('March', '8th'), ('May', '1st'), ('May', '2nd'), ('May', '9th'), ('June', '28th'), ('August', '24th'), ('October', '14th')]\n[('March', '8'), ('June', '28'), ('January', '1'), ('January', '8'), ('January', '22'), ('August', '24'), ('May', '1'), ('May', '2'), ('May', '9'), ('October', '14')]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=59"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=60"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622459569_764152425",
+   "id": "paragraph_1715622459569_764152425",
+   "dateCreated": "2024-05-13 20:47:39.569",
+   "dateStarted": "2024-05-13 20:47:45.448",
+   "dateFinished": "2024-05-13 20:47:45.850",
+   "status": "FINISHED"
+  },
+  {
+   "title": "combineByKey()",
+   "text": "%pyspark\n\n# Most flexible aggregation transformation for pair RDD\n\n\n# first and last holiday for each month\nr = holidays.combineByKey(lambda x: (x,x),                            # initialize combiner for new key\n                          lambda x,y: (min(x[0],y), max(x[1],y)),     # add new value to existing combiner\n                          lambda x,y: (min(x[0],y[0]),max(x[0],y[0])) # merge two combiners\n                         )\nr.collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:29.680",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('March', (8, 8)), ('June', (28, 28)), ('January', (1, 22)), ('August', (24, 24)), ('May', (1, 9)), ('October', (14, 14))]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=61"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622465448_1843565837",
+   "id": "paragraph_1715622465448_1843565837",
+   "dateCreated": "2024-05-13 20:47:45.448",
+   "dateStarted": "2024-05-13 20:47:54.175",
+   "dateFinished": "2024-05-13 20:47:54.409",
+   "status": "FINISHED"
+  },
+  {
+   "title": "aggregateByKey()",
+   "text": "%pyspark\n# Simpler version of combineByKey()\n\nr = holidays.aggregateByKey((32,0),                                   # initial value for combiner\n                          lambda x,y: (min(x[0],y), max(x[1],y)),     # add new value to existing combiner\n                          lambda x,y: (min(x[0],y[0]),max(x[0],y[0])) # merge two combiners\n                         )\n\nr.collect()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:51:52.405",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('March', (8, 8)), ('June', (28, 28)), ('January', (1, 22)), ('August', (24, 24)), ('May', (1, 9)), ('October', (14, 14))]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=62"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622474174_1605108435",
+   "id": "paragraph_1715622474174_1605108435",
+   "dateCreated": "2024-05-13 20:47:54.174",
+   "dateStarted": "2024-05-13 20:47:59.854",
+   "dateFinished": "2024-05-13 20:48:00.145",
+   "status": "FINISHED"
+  },
+  {
+   "title": "sortByKey()",
+   "text": "%pyspark\n\nmonths.sortByKey(ascending=False).collect()",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:51:37.576",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('September', 9), ('October', 10), ('November', 11), ('May', 5), ('March', 3), ('June', 6), ('July', 7), ('January', 1), ('February', 2), ('December', 12), ('August', 8), ('April', 4)]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=67"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=68"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=69"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622479853_1477812748",
+   "id": "paragraph_1715622479853_1477812748",
+   "dateCreated": "2024-05-13 20:47:59.854",
+   "dateStarted": "2024-05-13 20:48:23.817",
+   "dateFinished": "2024-05-13 20:48:24.334",
+   "status": "FINISHED"
+  },
+  {
+   "title": "join()",
+   "text": "%pyspark\nmonths.join(holidays).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:39.176",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('January', (1, 1)), ('January', (1, 8)), ('January', (1, 22)), ('August', (8, 24)), ('March', (3, 8)), ('June', (6, 28)), ('May', (5, 1)), ('May', (5, 2)), ('May', (5, 9)), ('October', (10, 14))]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=66"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622490474_1024833159",
+   "id": "paragraph_1715622490474_1024833159",
+   "dateCreated": "2024-05-13 20:48:10.474",
+   "dateStarted": "2024-05-13 20:48:14.893",
+   "dateFinished": "2024-05-13 20:48:15.545",
+   "status": "FINISHED"
+  },
+  {
+   "title": "leftOuterJoin() and rightOuterJoin()",
+   "text": "%pyspark\n\nmonths.leftOuterJoin(holidays).collect()\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:47.884",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('February', (2, None)), ('January', (1, 1)), ('January', (1, 8)), ('January', (1, 22)), ('August', (8, 24)), ('September', (9, None)), ('November', (11, None)), ('April', (4, None)), ('March', (3, 8)), ('June', (6, 28)), ('July', (7, None)), ('May', (5, 1)), ('May', (5, 2)), ('May', (5, 9)), ('December', (12, None)), ('October', (10, 14))]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=70"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622494893_1119313322",
+   "id": "paragraph_1715622494893_1119313322",
+   "dateCreated": "2024-05-13 20:48:14.893",
+   "dateStarted": "2024-05-13 20:48:30.506",
+   "dateFinished": "2024-05-13 20:48:31.166",
+   "status": "FINISHED"
+  },
+  {
+   "title": "subtractByKey()",
+   "text": "%pyspark\n\nmonths.subtractByKey(holidays).collect() # monthes with no holidays\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:52:55.878",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('February', 2), ('September', 9), ('November', 11), ('April', 4), ('July', 7), ('December', 12)]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=71"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622510506_112228972",
+   "id": "paragraph_1715622510506_112228972",
+   "dateCreated": "2024-05-13 20:48:30.506",
+   "dateStarted": "2024-05-13 20:48:34.759",
+   "dateFinished": "2024-05-13 20:48:35.427",
+   "status": "FINISHED"
+  },
+  {
+   "title": "cogroup()",
+   "text": "%pyspark\n\nvacation = sc.parallelize([('January',2),('January',3),('January',4),('January',5)])\n\nfree_days = holidays.cogroup(vacation)\n\nprint([(k, list(v[0]), list(v[1])) for k,v in free_days.collect()])\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:53:03.650",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "[('January', [1, 8, 22], [2, 3, 4, 5]), ('August', [24], []), ('March', [8], []), ('June', [28], []), ('May', [1, 2, 9], []), ('October', [14], [])]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=72"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622514758_687068839",
+   "id": "paragraph_1715622514758_687068839",
+   "dateCreated": "2024-05-13 20:48:34.758",
+   "dateStarted": "2024-05-13 20:48:39.191",
+   "dateFinished": "2024-05-13 20:48:39.852",
+   "status": "FINISHED"
+  },
+  {
+   "title": "keys() and values()",
+   "text": "%pyspark\n\nprint(holidays.keys().collect())\nprint(holidays.values().collect())",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:53:13.988",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "['January', 'January', 'January', 'March', 'May', 'May', 'May', 'June', 'August', 'October']\n[1, 8, 22, 8, 1, 2, 9, 28, 24, 14]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=73"
+      },
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=74"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622519191_1902138625",
+   "id": "paragraph_1715622519191_1902138625",
+   "dateCreated": "2024-05-13 20:48:39.191",
+   "dateStarted": "2024-05-13 20:48:45.921",
+   "dateFinished": "2024-05-13 20:48:46.234",
+   "status": "FINISHED"
+  },
+  {
+   "title": "countByKey() action",
+   "text": "%pyspark\n\nprint(holidays.countByKey())\n",
+   "user": "anonymous",
+   "dateUpdated": "2024-05-13 20:53:24.157",
+   "progress": 0,
+   "config": {
+    "editorSetting": {
+     "language": "python",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/python",
+    "fontSize": 9.0,
+    "title": true,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "defaultdict(<class 'int'>, {'January': 3, 'March': 1, 'May': 3, 'June': 1, 'August': 1, 'October': 1})\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://linux:4040/jobs/job?id=75"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500,
+   "jobName": "paragraph_1715622525921_763957704",
+   "id": "paragraph_1715622525921_763957704",
+   "dateCreated": "2024-05-13 20:48:45.921",
+   "dateStarted": "2024-05-13 20:48:51.309",
+   "dateFinished": "2024-05-13 20:48:51.460",
+   "status": "FINISHED"
+  }
+ ],
+ "name": "rdd_basics_2",
+ "id": "2JYS6APBK",
+ "defaultInterpreterGroup": "spark",
+ "version": "0.11.1",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false
+ },
+ "info": {}
+}
