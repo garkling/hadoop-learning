@@ -39,7 +39,7 @@ gcloud dataproc clusters create "$CLUSTER_NAME" \
         --worker-machine-type e2-standard-4 \
         --worker-boot-disk-type pd-balanced \
         --worker-boot-disk-size 200 \
-        --image-version 2.2-debian12 \
+        --image-version 2.0-debian10 \
         --optional-components ZEPPELIN \
         --project "$PROJECT" \
         --bucket "$PROJECT"-staging \
